@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.example.agecalculator","l":"AgecalculatorApplication"},{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.example.agecalculator","l":"ProjectController"}];updateSearchResults();

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Kalkulator Usia</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            * {
+                margin-left: 5px;
+                font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+            }
+            .header {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+            #result {
+                text-align: center;
+                color: #428BCA;
+                font-size: 1.3rem;
+                font-weight: bold;
+            }
+            table {
+                background-color: #F6F6F6;
+                border: 1px solid #CDCDCD;
+                border-radius: 10px;
+                padding: 15px;
+                width: 500px;
+            }
+            input[type="date"] {
+                width: 100%;
+            }
+            button {
+                background-color: #428BCA;
+                padding: 6px 16px;
+                border: 1px solid #357EBD;
+                border-radius: 4px;
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 20px;
+                margin-top: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">Kalkulator Usia</div>
+        <!--Form-->
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td><input type="date" id="birth-date" value="1985-01-01" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Usia saat Tanggal</td>
+                        <td><input type="date" id="calculate-date" required /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">
+                            <button style="cursor: pointer" onclick="check()">Hitung</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--End Form-->
+        <br>
+        <!--Result-->
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="3" id="result"></td>
+                    </tr>
+<!--                    <tr>
+                        <td>Usia dalam Bulan</td>
+                        <td>:</td>
+                        <td id="age-in-months"></td>
+                    </tr>
+                    <tr>
+                        <td>Usia dalam Minggu</td>
+                        <td>:</td>
+                        <td id="age-in-weeks"></td>
+                    </tr>
+                    <tr>
+                        <td>Usia dalam Hari</td>
+                        <td>:</td>
+                        <td id="age-in-days"></td>
+                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script>
+        document.getElementById("calculate-date").value = "2022-02-26";
+        check();
+        function check() {
+            if ($("#birth-date").val() && $("#calculate-date").val()) {
+                $.ajax({
+                    type: "POST",
+                    url: "/check",
+                    data: {
+                        Birth_Date: $("#birth-date").val(),
+                        Calculate_Date: $("#calculate-date").val()
+                    },
+                    success: function(result) {
+                        $("#result").html(result);
+//                        $("#age-in-months").html(result);
+//                        $("#age-in-weeks").html(result);
+//                        $("#age-in-days").html(result);
+                    },
+                    error: function(req, status, error) {
+                        console.log(error);
+                    }  
+                });
+            } else {
+                alert("Masukkan Tanggal Lahir dan Usia saat Tanggal");
+            }
+        }
+    </script>
+</html>
